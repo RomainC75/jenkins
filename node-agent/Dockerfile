@@ -17,7 +17,8 @@ RUN node --version
 RUN npm --version
 
 # make java executable
-RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-arm64/bin/java
+# RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-arm64/bin/java
+RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/jre/bin
 ENV PATH=${JAVA_HOME}/bin:${PATH}
