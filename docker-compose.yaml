@@ -38,7 +38,7 @@ services:
       - jenkins-docker-certs:/certs/client:ro
       - ./jenkins-home:/home
     ports:
-      - 8083:8080
+      - 8080:8080
       - 50000:50000
     depends_on:
       - jenkins-docker
@@ -53,7 +53,7 @@ services:
     restart: always
     ports:
       - 5005:22
-      - 8000:8000
+      - 8003:8000
     networks:
       - jenkins
 
