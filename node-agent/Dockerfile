@@ -59,9 +59,10 @@ ENV PATH=${JAVA_HOME}/bin:${PATH}
 
 RUN groupadd -g 1000 jenkins && \
     useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
-    usermod -aG sudo jenkins
+    usermod -aG sudo jenkins && \
+    echo 'superman:abc123' | chpasswd
 
-RUN echo 'superman:abc123' | chpasswd
+RUN usermod -aG docker jenkins
 
 RUN service ssh start
 
