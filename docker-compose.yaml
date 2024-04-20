@@ -58,6 +58,8 @@ services:
       - 8003:8000
     networks:
       - jenkins
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 
 networks:
