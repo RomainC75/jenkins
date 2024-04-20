@@ -53,16 +53,15 @@ RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/jre/bin
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 
-# RUN groupadd -g 1000 superman && \
-#     useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && \
-#     usermod -aG sudo superman
+RUN groupadd -g 1000 superman && \
+    useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && \
+    usermod -aG sudo superman
 
-RUN groupadd -g 1000 jenkins && \
-    useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
-    usermod -aG sudo jenkins && \
-    echo 'jenkins:abc123' | chpasswd
+# RUN groupadd -g 1000 jenkins && \
+#     useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
+#     usermod -aG sudo jenkins &&
 
-RUN usermod -aG docker jenkins
+RUN echo 'superman:abc123' | chpasswd
 
 RUN service ssh start
 
