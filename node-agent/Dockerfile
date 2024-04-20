@@ -28,7 +28,8 @@ RUN apt-get update \
         "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
     && apt-get update \
-    && apt-get install -y docker-ce docker-ce-cli containerd.io
+    && apt-get install -y docker-ce docker-ce-cli containerd.io \
+    && apt-get clean
 
 
 # install nodejs
@@ -53,7 +54,12 @@ ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/jre/bin
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 
 RUN groupadd -g 1000 superman && \
-    useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && usermod -aG sudo superman
+    useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && \
+    usermod -aG sudo superman
+
+RUN groupadd -g 1000 jenkins && \
+    useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
+    usermod -aG sudo jenkins 
 
 RUN echo 'superman:abc123' | chpasswd
 
