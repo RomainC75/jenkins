@@ -58,6 +58,7 @@ ENV PATH=${JAVA_HOME}/bin:${PATH}
 #     usermod -aG sudo superman
 
 # group docker already exists
+RUN useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman
 RUN usermod -aG docker superman
 
 # RUN groupadd -g 1000 jenkins && \
