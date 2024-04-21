@@ -75,7 +75,7 @@ RUN usermod -aG docker superman
 RUN mkdir -p /var/run/docker.sock /var/lib/docker
 
 RUN chown superman:docker /var/run/docker.sock /var/lib/docker
-USER superman
+# USER superman
 
 
 
