@@ -59,7 +59,7 @@ RUN groupadd -g 1000 superman && \
 
 # group docker already exists
 # RUN useradd -u 1000 -s /bin/bash -m -d /home/superman superman
-# RUN usermod -aG docker superman
+RUN usermod -aG docker superman
 
 # RUN groupadd -g 1000 jenkins && \
 #     useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
