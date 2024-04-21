@@ -53,19 +53,33 @@ RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/jre/bin
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 
-RUN groupadd -g 1000 superman && \
-    useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && \
-    usermod -aG sudo superman
+# RUN groupadd -g 1000 superman && \
+#     useradd -u 1000 -g superman -s /bin/bash -m -d /home/superman superman && \
+#     usermod -aG sudo superman
 
 # group docker already exists
 # RUN useradd -u 1000 -s /bin/bash -m -d /home/superman superman
-RUN usermod -aG docker superman
+# RUN usermod -aG docker superman
 
 # RUN groupadd -g 1000 jenkins && \
 #     useradd -u 1000 -g jenkins -m -s /bin/bash jenkins && \
 #     usermod -aG sudo jenkins &&
 
-RUN echo 'superman:abc123' | chpasswd
+
+# Create a new user 'superman'
+RUN useradd -m -s /bin/bash superman && \
+    usermod -aG sudo superman && \
+    echo 'superman:abc123' | chpasswd
+
+RUN usermod -aG docker superman
+RUN mkdir -p /var/run/docker.sock /var/lib/docker
+
+RUN chown superman:docker /var/run/docker.sock /var/lib/docker
+USER superman
+
+
+
+# RUN echo 'superman:abc123' | chpasswd
 
 RUN service ssh start
 
