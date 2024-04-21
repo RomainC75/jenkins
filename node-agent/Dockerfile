@@ -67,16 +67,13 @@ ENV PATH=${JAVA_HOME}/bin:${PATH}
 
 
 # Create a new user 'superman'
-RUN useradd -m -s /bin/bash superman && \
-    usermod -aG sudo superman && \
-    echo 'superman:abc123' | chpasswd
+RUN sudo mkdir -p /run/sshd && \
+    sudo chown root:superman /run/sshd && \
+    sudo chmod 755 /run/sshd && \
+    sudo mkdir -p /var/run/docker.sock /var/lib/docker && \
+    sudo chown superman:docker /var/run/docker.sock /var/lib/docker
 
-RUN usermod -aG docker superman
-RUN mkdir -p /var/run/docker.sock /var/lib/docker
-
-RUN chown superman:docker /var/run/docker.sock /var/lib/docker
 USER superman
-
 
 
 # RUN echo 'superman:abc123' | chpasswd
