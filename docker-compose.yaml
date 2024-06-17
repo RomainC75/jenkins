@@ -1,25 +1,25 @@
 version: '3.8'
 services:
-  jenkins-docker:
-    image: docker:dind
-    container_name: jenkins-docker
-    restart: always
-    privileged: true
-    networks:
-      jenkins:
-        aliases:
-          - docker
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
-    volumes:
-      - jenkins-docker-certs:/certs/client
-      - jenkins-data:/var/jenkins_home
-    ports:
-      - 3010:3000
-      - 5010:5000
-      - 2376:2376
-    tty: true
-    command: --storage-driver overlay2
+  # jenkins-docker:
+  #   image: docker:dind
+  #   container_name: jenkins-docker
+  #   restart: always
+  #   privileged: true
+  #   networks:
+  #     jenkins:
+  #       aliases:
+  #         - docker
+  #   environment:
+  #     - DOCKER_TLS_CERTDIR=/certs
+  #   volumes:
+  #     - jenkins-docker-certs:/certs/client
+  #     - jenkins-data:/var/jenkins_home
+  #   ports:
+  #     - 3010:3000
+  #     - 5010:5000
+  #     - 2376:2376
+  #   tty: true
+  #   command: --storage-driver overlay2
 
   jenkins-blueocean:
     build:
