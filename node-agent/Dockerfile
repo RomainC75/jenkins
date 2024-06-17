@@ -80,6 +80,7 @@ RUN chown superman:docker /var/run/docker.sock /var/lib/docker
 
 
 # RUN echo 'superman:abc123' | chpasswd
+RUN systemctl stop docker 
 
 RUN service ssh start
 
